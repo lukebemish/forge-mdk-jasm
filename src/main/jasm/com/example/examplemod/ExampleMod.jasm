@@ -1,0 +1,109 @@
+public class com/example/examplemod/ExampleMod {
+    public final static LOGGER org/slf4j/Logger
+
+    public final static BLOCKS net/minecraftforge/registries/DeferredRegister
+    public final static ITEMS net/minecraftforge/registries/DeferredRegister
+
+    public final static EXAMPLE_BLOCK net/minecraftforge/registries/RegistryObject
+    public final static EXAMPLE_BLOCK_ITEM net/minecraftforge/registries/RegistryObject
+
+    public <init>()V {
+        aload 0
+        invokespecial java/lang/Object.<init>()V
+
+        invokestatic net/minecraftforge/fml/javafmlmod/FMLJavaModLoadingContext.get()net/minecraftforge/fml/javafmlmod/FMLJavaModLoadingContext
+        invokevirtual net/minecraftforge/fml/javafmlmod/FMLJavaModLoadingContext.getModEventBus()net/minecraftforge/eventbus/api/IEventBus
+        astore 1
+
+        getstatic com/example/examplemod/ExampleMod.ITEMS net/minecraftforge/registries/DeferredRegister
+        aload 1
+        invokevirtual net/minecraftforge/registries/DeferredRegister.register(net/minecraftforge/eventbus/api/IEventBus)V
+
+        getstatic com/example/examplemod/ExampleMod.BLOCKS net/minecraftforge/registries/DeferredRegister
+        aload 1
+        invokevirtual net/minecraftforge/registries/DeferredRegister.register(net/minecraftforge/eventbus/api/IEventBus)V
+
+        return
+    }
+
+    static <clinit>()V {
+        invokestatic com/mojang/logging/LogUtils.getLogger()org/slf4j/Logger
+        putstatic com/example/examplemod/ExampleMod.LOGGER org/slf4j/Logger
+
+        getstatic net/minecraftforge/registries/ForgeRegistries.BLOCKS net/minecraftforge/registries/IForgeRegistry
+        ldc "examplemod"
+        invokestatic net/minecraftforge/registries/DeferredRegister.create(net/minecraftforge/registries/IForgeRegistry,java/lang/String)net/minecraftforge/registries/DeferredRegister
+        putstatic com/example/examplemod/ExampleMod.BLOCKS net/minecraftforge/registries/DeferredRegister
+
+        getstatic net/minecraftforge/registries/ForgeRegistries.ITEMS net/minecraftforge/registries/IForgeRegistry
+        ldc "examplemod"
+        invokestatic net/minecraftforge/registries/DeferredRegister.create(net/minecraftforge/registries/IForgeRegistry,java/lang/String)net/minecraftforge/registries/DeferredRegister
+        putstatic com/example/examplemod/ExampleMod.ITEMS net/minecraftforge/registries/DeferredRegister
+
+        getstatic com/example/examplemod/ExampleMod.BLOCKS net/minecraftforge/registries/DeferredRegister
+        ldc "example_block"
+        invokedynamic get()java/util/function/Supplier {
+            invokestatic java/lang/invoke/LambdaMetafactory.metafactory(
+                java/lang/invoke/MethodHandled$Lookup,
+                java/lang/String,
+                java/lang/invoke/MethodType,
+                java/lang/invoke/MethodType,
+                java/lang/invoke/MethodHandle,
+                java/lang/invoke/MethodType
+            )java/lang/invoke/CallSite
+            [
+                ()java/lang/Object,
+                invokestatic com/example/examplemod/ExampleMod.lambda0()net/minecraft/world/level/block/Block,
+                ()net/minecraft/world/level/block/Block
+            ]
+        }
+        invokevirtual net/minecraftforge/registries/DeferredRegister.register(java/lang/String,java/util/function/Supplier)net/minecraftforge/registries/RegistryObject
+        putstatic com/example/examplemod/ExampleMod.EXAMPLE_BLOCK net/minecraftforge/registries/RegistryObject
+
+        getstatic com/example/examplemod/ExampleMod.ITEMS net/minecraftforge/registries/DeferredRegister
+        ldc "example_block"
+        invokedynamic get()java/util/function/Supplier {
+            invokestatic java/lang/invoke/LambdaMetafactory.metafactory(
+                java/lang/invoke/MethodHandled$Lookup,
+                java/lang/String,
+                java/lang/invoke/MethodType,
+                java/lang/invoke/MethodType,
+                java/lang/invoke/MethodHandle,
+                java/lang/invoke/MethodType
+            )java/lang/invoke/CallSite
+            [
+                ()java/lang/Object,
+                invokestatic com/example/examplemod/ExampleMod.lambda1()net/minecraft/world/item/Item,
+                ()net/minecraft/world/item/Item
+            ]
+        }
+        invokevirtual net/minecraftforge/registries/DeferredRegister.register(java/lang/String,java/util/function/Supplier)net/minecraftforge/registries/RegistryObject
+        putstatic com/example/examplemod/ExampleMod.EXAMPLE_BLOCK_ITEM net/minecraftforge/registries/RegistryObject
+
+        return
+    }
+
+    public static lambda0()net/minecraft/world/level/block/Block {
+        new net/minecraft/world/level/block/Block
+        dup
+        getstatic net/minecraft/world/level/material/Material.STONE net/minecraft/world/level/material/Material
+        invokestatic net/minecraft/world/level/block/state/BlockBehavior$Properties.of (net/minecraft/world/level/Material)net/minecraft/world/level/block/state/BlockBehaviour$Properties
+        invokespecial net/minecraft/world/level/block/Block.<init>(net/minecraft/world/level/block/state/BlockBehaviour$Properties)V
+        areturn
+    }
+
+    public static lambda1()net/minecraft/world/item/Item {
+        new net/minecraft/world/level/item/BlockItem
+        dup
+        getstatic com/example/ecamplemod/ExampleMod.EXAMPLE_BLOCK net/minecraftforge/registries/RegistryObject
+        invokevirtual net/minecraftforge/registries/RegistryObject.get()java/lang/Object
+        checkcast net/minecraft/world/level/block/Block
+        new net/minecraft/world/item/Item$Properties
+        dup
+        invokespecial net/minecraft/world/item/Item$Properties.<init>()V
+        getstatic net/minecraft/world/item/CreativeModeTab.TAB_BUILDING_BLOCKS net/minecraft/world/item/CreativeModeTab
+        invokevirtual net/minecraft/world/item/Item$Properties.tab(net/minecraft/world/item/CreativeModeTab)net/minecraft/world/item/Item$Properties
+        invokespecial net/minecraft/world/item/BlockItem.<init>(net/minecraft/world/level/block/Block,net/minecraft/world/item/Item$Properties)V
+        areturn
+    }
+}
