@@ -1,0 +1,16 @@
+public class com/example/examplemod/ExampleMod$ClientModEvents {
+    public static onClientSetup(net/minecraftforge/fml/event/lifecycle/FMLClientSetupEvent)V {
+        getstatic com/example/examplemod/ExampleMod.LOGGER org/slf4j/Logger
+        ldc "HELLO FROM CLIENT SETUP"
+        invokeinterface org/slf4j/Logger.info(java/lang/String)V
+
+        getstatic com/example/examplemod/ExampleMod.LOGGER org/slf4j/Logger
+        ldc "MINECRAFT NAME >> {}"
+        invokestatic net/minecraft/client/Minecraft.getInstance()net/minecraft/client/Minecraft
+        invokevirtual net/minecraft/client/Minecraft.getUser()net/minecraft/client/User
+        invokevirtual net/minecraft/client/User.getName()java/lang/String
+        invokeinterface org/slf4j/Logger.info(java/lang/String,java/lang/Object)V
+
+        return
+    }
+}

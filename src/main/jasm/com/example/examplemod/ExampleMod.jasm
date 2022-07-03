@@ -1,4 +1,7 @@
 public class com/example/examplemod/ExampleMod {
+
+    public final static MODID java/lang/String = "examplemod"
+
     public final static LOGGER org/slf4j/Logger
 
     public final static BLOCKS net/minecraftforge/registries/DeferredRegister
@@ -15,6 +18,25 @@ public class com/example/examplemod/ExampleMod {
         invokevirtual net/minecraftforge/fml/javafmlmod/FMLJavaModLoadingContext.getModEventBus()net/minecraftforge/eventbus/api/IEventBus
         astore 1
 
+        aload 1
+        aload 0
+        invokedynamic accept(com/example/examplemod/ExampleMod)java/util/function/Consumer {
+            invokestatic java/lang/invoke/LambdaMetafactory.metafactory(
+                java/lang/invoke/MethodHandles$Lookup,
+                java/lang/String,
+                java/lang/invoke/MethodType,
+                java/lang/invoke/MethodType,
+                java/lang/invoke/MethodHandle,
+                java/lang/invoke/MethodType,
+            )java/lang/invoke/CallSite
+            [
+                (java/lang/Object)V,
+                invokevirtual com/example/examplemod/ExampleMod.commonSetup(net/minecraftforge/fml/event/lifecycle/FMLCommonSetupEvent)V,
+                (net/minecraftforge/fml/event/lifecycle/FMLCommonSetupEvent)V
+            ]
+        }
+        invokeinterface net/minecraftforge/eventbus/api/IEventBus.addListener(java/util/function/Consumer)V
+
         getstatic com/example/examplemod/ExampleMod.ITEMS net/minecraftforge/registries/DeferredRegister
         aload 1
         invokevirtual net/minecraftforge/registries/DeferredRegister.register(net/minecraftforge/eventbus/api/IEventBus)V
@@ -22,6 +44,43 @@ public class com/example/examplemod/ExampleMod {
         getstatic com/example/examplemod/ExampleMod.BLOCKS net/minecraftforge/registries/DeferredRegister
         aload 1
         invokevirtual net/minecraftforge/registries/DeferredRegister.register(net/minecraftforge/eventbus/api/IEventBus)V
+
+        getstatic net/minecraftforge/common/MinecraftForge.EVENT_BUS net/minecraftforge/eventbus/api/IEventBus
+        aload 0
+        invokedynamic accept(com/example/examplemod/ExampleMod)java/util/function/Consumer {
+            invokestatic java/lang/invoke/LambdaMetafactory.metafactory(
+                java/lang/invoke/MethodHandles$Lookup,
+                java/lang/String,
+                java/lang/invoke/MethodType,
+                java/lang/invoke/MethodType,
+                java/lang/invoke/MethodHandle,
+                java/lang/invoke/MethodType,
+            )java/lang/invoke/CallSite
+            [
+                (java/lang/Object)V,
+                invokevirtual com/example/examplemod/ExampleMod.onServerStarting(net/minecraftforge/event/server/ServerStartingEvent)V,
+                (net/minecraftforge/event/server/ServerStartingEvent)V
+            ]
+        }
+        invokeinterface net/minecraftforge/eventbus/api/IEventBus.addListener(java/util/function/Consumer)V
+
+        aload 1
+        invokedynamic accept()java/util/function/Consumer {
+            invokestatic java/lang/invoke/LambdaMetafactory.metafactory(
+                java/lang/invoke/MethodHandles$Lookup,
+                java/lang/String,
+                java/lang/invoke/MethodType,
+                java/lang/invoke/MethodType,
+                java/lang/invoke/MethodHandle,
+                java/lang/invoke/MethodType,
+            )java/lang/invoke/CallSite
+            [
+                (java/lang/Object)V,
+                invokestatic com/example/examplemod/ExampleMod$ClientModEvents.onClientSetup(net/minecraftforge/fml/event/lifecycle/FMLClientSetupEvent)V,
+                (net/minecraftforge/fml/event/lifecycle/FMLClientSetupEvent)V
+            ]
+        }
+        invokeinterface net/minecraftforge/eventbus/api/IEventBus.addListener(java/util/function/Consumer)V
 
         return
     }
@@ -105,5 +164,28 @@ public class com/example/examplemod/ExampleMod {
         invokevirtual net/minecraft/world/item/Item$Properties.tab(net/minecraft/world/item/CreativeModeTab)net/minecraft/world/item/Item$Properties
         invokespecial net/minecraft/world/item/BlockItem.<init>(net/minecraft/world/level/block/Block,net/minecraft/world/item/Item$Properties)V
         areturn
+    }
+
+    private commonSetup(net/minecraftforge/fml/event/lifecycle/FMLCommonSetupEvent)V {
+        getstatic com/example/examplemod/ExampleMod.LOGGER org/slf4j/Logger
+        ldc "HELLO FROM COMMON SETUP"
+        invokeinterface org/slf4j/Logger.info(java/lang/String)V
+
+        getstatic com/example/examplemod/ExampleMod.LOGGER org/slf4j/Logger
+        ldc "DIRT BLOCK >> {}"
+        getstatic net/minecraftforge/registries/ForgeRegistries.BLOCKS net/minecraftforge/registries/IForgeRegistry
+        getstatic net/minecraft/world/level/block/Blocks.DIRT net/minecraft/world/level/block/Block
+        invokeinterface net/minecraftforge/registries/IForgeRegistry.getKey(java/lang/Object)net/minecraft/resources/ResourceLocation
+        invokeinterface org/slf4j/Logger.info(java/lang/String,java/lang/Object)V
+
+        return
+    }
+
+    public onServerStarting(net/minecraftforge/event/server/ServerStartingEvent)V {
+        getstatic com/example/examplemod/ExampleMod.LOGGER org/slf4j/Logger
+        ldc "HELLO from server starting"
+        invokeinterface org/slf4j/Logger.info(java/lang/String)V
+
+        return
     }
 }
