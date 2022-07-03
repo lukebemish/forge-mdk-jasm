@@ -14,14 +14,16 @@ archivesBaseName = 'modid'
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
-sourceSets {
-    dummy {
-        java {
-            classesDirectory.set(file('build/classes/jasm/main'))
-            setSrcDirs([])
+task copyJasmOutput {
+    doLast {
+        copy {
+            from 'build/classes/jasm'
+            into 'build/classes/java'
         }
     }
 }
+
+copyJasmOutput.dependsOn assembleJasm
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
@@ -66,7 +68,6 @@ minecraft {
             mods {
                 examplemod {
                     source sourceSets.main
-                    source sourceSets.dummy
                 }
             }
         }
@@ -83,7 +84,6 @@ minecraft {
             mods {
                 examplemod {
                     source sourceSets.main
-                    source sourceSets.dummy
                 }
             }
         }
@@ -103,7 +103,6 @@ minecraft {
             mods {
                 examplemod {
                     source sourceSets.main
-                    source sourceSets.dummy
                 }
             }
         }
@@ -121,7 +120,6 @@ minecraft {
             mods {
                 examplemod {
                     source sourceSets.main
-                    source sourceSets.dummy
                 }
             }
         }
@@ -176,7 +174,6 @@ jar {
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
-    from sourceSets.dummy.output
 }
 
 idea {
@@ -185,7 +182,10 @@ idea {
     }
 }
 
-tasks.getByName("idea").dependsOn assembleJasm
+tasks.getByName("idea").dependsOn copyJasmOutput
+tasks.withType(JavaCompile).configureEach {
+    it.dependsOn copyJasmOutput
+}
 
 // Example configuration to allow publishing using the maven-publish plugin
 // This is the preferred method to reobfuscate your jar file
