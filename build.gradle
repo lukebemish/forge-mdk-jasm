@@ -1,7 +1,7 @@
 plugins {
+    id 'java'
     id "com.roscopeco.jasm" version "0.6.0"
     id 'idea'
-    id 'java'
     id 'eclipse'
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '5.1.+'
@@ -19,6 +19,15 @@ idea {
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+sourceSets {
+    dummy {
+        java {
+            destinationDirectory.set(file('build/classes/jasm/main'))
+            setSrcDirs([])
+        }
+    }
+}
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
@@ -63,6 +72,7 @@ minecraft {
             mods {
                 examplemod {
                     source sourceSets.main
+                    source sourceSets.dummy
                 }
             }
         }
@@ -79,6 +89,7 @@ minecraft {
             mods {
                 examplemod {
                     source sourceSets.main
+                    source sourceSets.dummy
                 }
             }
         }
@@ -98,6 +109,7 @@ minecraft {
             mods {
                 examplemod {
                     source sourceSets.main
+                    source sourceSets.dummy
                 }
             }
         }
@@ -115,6 +127,7 @@ minecraft {
             mods {
                 examplemod {
                     source sourceSets.main
+                    source sourceSets.dummy
                 }
             }
         }
@@ -151,6 +164,9 @@ dependencies {
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
+
+    // Include generated jasm classes
+    implementation files('build/classes/jasm/main')
 }
 
 // Example for how to get properties into the manifest for reading at runtime.

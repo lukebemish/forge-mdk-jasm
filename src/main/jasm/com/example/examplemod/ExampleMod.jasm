@@ -44,12 +44,12 @@ public class com/example/examplemod/ExampleMod {
         ldc "example_block"
         invokedynamic get()java/util/function/Supplier {
             invokestatic java/lang/invoke/LambdaMetafactory.metafactory(
-                java/lang/invoke/MethodHandled$Lookup,
+                java/lang/invoke/MethodHandles$Lookup,
                 java/lang/String,
                 java/lang/invoke/MethodType,
                 java/lang/invoke/MethodType,
                 java/lang/invoke/MethodHandle,
-                java/lang/invoke/MethodType
+                java/lang/invoke/MethodType,
             )java/lang/invoke/CallSite
             [
                 ()java/lang/Object,
@@ -64,12 +64,12 @@ public class com/example/examplemod/ExampleMod {
         ldc "example_block"
         invokedynamic get()java/util/function/Supplier {
             invokestatic java/lang/invoke/LambdaMetafactory.metafactory(
-                java/lang/invoke/MethodHandled$Lookup,
+                java/lang/invoke/MethodHandles$Lookup,
                 java/lang/String,
                 java/lang/invoke/MethodType,
                 java/lang/invoke/MethodType,
                 java/lang/invoke/MethodHandle,
-                java/lang/invoke/MethodType
+                java/lang/invoke/MethodType,
             )java/lang/invoke/CallSite
             [
                 ()java/lang/Object,
@@ -87,15 +87,15 @@ public class com/example/examplemod/ExampleMod {
         new net/minecraft/world/level/block/Block
         dup
         getstatic net/minecraft/world/level/material/Material.STONE net/minecraft/world/level/material/Material
-        invokestatic net/minecraft/world/level/block/state/BlockBehavior$Properties.of (net/minecraft/world/level/Material)net/minecraft/world/level/block/state/BlockBehaviour$Properties
+        invokestatic net/minecraft/world/level/block/state/BlockBehaviour$Properties.of (net/minecraft/world/level/material/Material)net/minecraft/world/level/block/state/BlockBehaviour$Properties
         invokespecial net/minecraft/world/level/block/Block.<init>(net/minecraft/world/level/block/state/BlockBehaviour$Properties)V
         areturn
     }
 
     public static lambda1()net/minecraft/world/item/Item {
-        new net/minecraft/world/level/item/BlockItem
+        new net/minecraft/world/item/BlockItem
         dup
-        getstatic com/example/ecamplemod/ExampleMod.EXAMPLE_BLOCK net/minecraftforge/registries/RegistryObject
+        getstatic com/example/examplemod/ExampleMod.EXAMPLE_BLOCK net/minecraftforge/registries/RegistryObject
         invokevirtual net/minecraftforge/registries/RegistryObject.get()java/lang/Object
         checkcast net/minecraft/world/level/block/Block
         new net/minecraft/world/item/Item$Properties
